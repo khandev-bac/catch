@@ -57,15 +57,15 @@ const RootTabs = () => {
                 <tab.icon
                   width={TAB_BAR_ICON_SIZE}
                   height={TAB_BAR_ICON_SIZE}
-                  fill="red"
-                  color="red"
+                  fill="#FF0066"
+                  color="#FF0066"
                 />
               ) : (
                 <tab.icon
                   width={TAB_BAR_ICON_SIZE}
                   height={TAB_BAR_ICON_SIZE}
-                  fill="#9DB4C0"
-                  color="#9DB4C0"
+                  fill="#C2DFE3"
+                  color="#C2DFE3"
                 />
               ),
           }}

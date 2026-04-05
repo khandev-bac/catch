@@ -15,6 +15,9 @@ module.exports = {
         "sans-SemiBold": ["sans-SemiBold"],
         "sans-Bold": ["sans-Bold"],
       },
+      colors: {
+        primary: "#FF0066",
+      },
     },
   },
   plugins: [],
