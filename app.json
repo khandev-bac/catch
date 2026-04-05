@@ -38,6 +38,17 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/GoogleSans-Bold.ttf",
+            "./assets/fonts/GoogleSans-Medium.ttf",
+            "./assets/fonts/GoogleSans-Regular.ttf",
+            "./assets/fonts/GoogleSans-SemiBold.ttf"
+          ]
+        }
       ]
     ],
     "experiments": {

@@ -1,35 +1,78 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+import React from "react";
+import { Tabs } from "expo-router";
+import { tabs } from "@/utils/tabs";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Dimensions, Pressable } from "react-native";
+import * as Haptics from "expo-haptics";
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const TAB_BAR_WIDTH = 200;
+const TAB_BAR_HEIGHT = 60;
+const TAB_BAR_ICON_SIZE = 25;
+const RootTabs = () => {
+  const inset = useSafeAreaInsets();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          position: "absolute",
+          bottom: Math.max(inset.bottom, 30),
+          left: 0,
+          right: 0,
+          width: TAB_BAR_WIDTH,
+          marginHorizontal: (SCREEN_WIDTH - TAB_BAR_WIDTH) / 2,
+          height: TAB_BAR_HEIGHT,
+          borderRadius: 30,
+          backgroundColor: "#291720",
+          elevation: 10,
+          shadowColor: "#1B1B1E",
+          shadowOpacity: 0.25,
+          borderTopWidth: 0,
+          overflow: "hidden",
+        },
+        tabBarItemStyle: {
+          paddingVertical: TAB_BAR_HEIGHT / 2 - 20,
+        },
+        tabBarButton: (props) => (
+          <Pressable
+            {...props}
+            android_ripple={null}
+            onPress={(e) => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+              props.onPress?.(e);
+            }}
+          />
+        ),
+      }}
+    >
+      {tabs.map((tab) => (
+        <Tabs.Screen
+          key={tab.name}
+          name={tab.name}
+          options={{
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <tab.icon
+                  width={TAB_BAR_ICON_SIZE}
+                  height={TAB_BAR_ICON_SIZE}
+                  fill="red"
+                  color="red"
+                />
+              ) : (
+                <tab.icon
+                  width={TAB_BAR_ICON_SIZE}
+                  height={TAB_BAR_ICON_SIZE}
+                  fill="#9DB4C0"
+                  color="#9DB4C0"
+                />
+              ),
+          }}
+        />
+      ))}
     </Tabs>
   );
-}
+};
+
+export default RootTabs;
