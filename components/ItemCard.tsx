@@ -13,10 +13,10 @@ const ItemCard: FC<ItemCardI> = ({ itemImage, itemName, itemTime }) => {
       )}
       <View>
         {itemName && (
-          <Text className="text-lg font-sans-Medium">{itemName}</Text>
+          <Text className="text-lg font-sans-SemiBold">{itemName}</Text>
         )}
         {itemTime && (
-          <Text className="text-neutral-400 font-sans-Regular text-xs">
+          <Text className="text-neutral-400 font-sans-Medium text-xs">
             {itemTime}
           </Text>
         )}
